@@ -19,7 +19,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
+
 import android.text.InputFilter;
 import android.text.Spanned;
 import android.util.Log;
@@ -31,6 +31,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 
 /** Dialog to pick a folder. Also allows creating new folders. Used when not
  *  using the Storage Access Framework.

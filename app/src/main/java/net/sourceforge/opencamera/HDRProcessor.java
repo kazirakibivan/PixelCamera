@@ -23,8 +23,9 @@ import android.renderscript.RenderScript;
 import android.renderscript.Script;
 import android.renderscript.ScriptIntrinsicHistogram;
 import android.renderscript.Type;
-import android.support.annotation.RequiresApi;
 import android.util.Log;
+
+import androidx.annotation.RequiresApi;
 
 public class HDRProcessor {
 	private static final String TAG = "HDRProcessor";
