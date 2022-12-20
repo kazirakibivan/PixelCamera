@@ -61,8 +61,6 @@ import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.speech.tts.TextToSpeech;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.util.SparseIntArray;
 import android.view.GestureDetector;
@@ -79,6 +77,9 @@ import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.ZoomControls;
+
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 
 /** The main Activity for Open Camera.
  */
@@ -487,6 +488,7 @@ public class MainActivity extends Activity implements AudioListener.AudioListene
 
 	/** Determine whether we support Camera2 API.
 	 */
+	@SuppressLint("SuspiciousIndentation")
 	private void initCamera2Support() {
 		if( MyDebug.LOG )
 			Log.d(TAG, "initCamera2Support");
@@ -1856,7 +1858,8 @@ public class MainActivity extends Activity implements AudioListener.AudioListene
     /** Listens for the response from the Storage Access Framework dialog to select a folder
      *  (as opened with openFolderChooserDialogSAF()).
      */
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    @SuppressLint("WrongConstant")
+	@TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public void onActivityResult(int requestCode, int resultCode, Intent resultData) {
 		if( MyDebug.LOG )
 			Log.d(TAG, "onActivityResult: " + requestCode);
@@ -2460,9 +2463,11 @@ public class MainActivity extends Activity implements AudioListener.AudioListene
 					exposure_time_seek_bar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 						@Override
 						public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+							//Log.d(TAG, "exposure_time seekbar onProgressChanged: " + progress);
 							if( MyDebug.LOG )
 								Log.d(TAG, "exposure_time seekbar onProgressChanged: " + progress);
 							double frac = progress/(double)manual_n;
+							Log.d(TAG, "exposure_time frac: " + frac);
 							if( MyDebug.LOG )
 								Log.d(TAG, "exposure_time frac: " + frac);
 							//long exposure_time = min_exposure_time + (long)(frac * (max_exposure_time - min_exposure_time));
@@ -2507,6 +2512,9 @@ public class MainActivity extends Activity implements AudioListener.AudioListene
 				exposure_seek_bar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 					@Override
 					public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+						Log.d(TAG, "exposure seekbar onProgressChanged: " + progress);
+
 						if( MyDebug.LOG )
 							Log.d(TAG, "exposure seekbar onProgressChanged: " + progress);
 						preview.setExposure(min_exposure + progress);

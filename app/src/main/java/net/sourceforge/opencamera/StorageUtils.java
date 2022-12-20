@@ -30,8 +30,9 @@ import android.provider.MediaStore.Images;
 import android.provider.MediaStore.Video;
 import android.provider.MediaStore.Images.ImageColumns;
 import android.provider.MediaStore.Video.VideoColumns;
-import android.support.v4.content.ContextCompat;
 import android.util.Log;
+
+import androidx.core.content.ContextCompat;
 
 /** Provides access to the filesystem. Supports both standard and Storage
  *  Access Framework.
@@ -95,11 +96,11 @@ public class StorageUtils {
 		 				Log.e(TAG, "Couldn't resolve given uri [2]: " + uri); 
     	        }
     	        else {
-        	        String file_path = c.getString(c.getColumnIndex(Images.Media.DATA)); 
-        	        String file_name = c.getString(c.getColumnIndex(Images.Media.DISPLAY_NAME)); 
-        	        String mime_type = c.getString(c.getColumnIndex(Images.Media.MIME_TYPE)); 
-        	        long date_taken = c.getLong(c.getColumnIndex(Images.Media.DATE_TAKEN)); 
-        	        long date_added = c.getLong(c.getColumnIndex(Images.Media.DATE_ADDED)); 
+        	        @SuppressLint("Range") String file_path = c.getString(c.getColumnIndex(Images.Media.DATA));
+        	        @SuppressLint("Range") String file_name = c.getString(c.getColumnIndex(Images.Media.DISPLAY_NAME));
+        	        @SuppressLint("Range") String mime_type = c.getString(c.getColumnIndex(Images.Media.MIME_TYPE));
+        	        @SuppressLint("Range") long date_taken = c.getLong(c.getColumnIndex(Images.Media.DATE_TAKEN));
+        	        @SuppressLint("Range") long date_added = c.getLong(c.getColumnIndex(Images.Media.DATE_ADDED));
 	 				Log.d(TAG, "file_path: " + file_path); 
 	 				Log.d(TAG, "file_name: " + file_name); 
 	 				Log.d(TAG, "mime_type: " + mime_type); 

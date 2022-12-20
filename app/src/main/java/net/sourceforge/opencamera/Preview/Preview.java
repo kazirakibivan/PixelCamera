@@ -17,6 +17,7 @@ import net.sourceforge.opencamera.Preview.CameraSurface.MySurfaceView;
 import net.sourceforge.opencamera.Preview.CameraSurface.MyTextureView;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -58,7 +59,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.ParcelFileDescriptor;
 import android.provider.DocumentsContract;
-import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.util.Pair;
 import android.view.Display;
@@ -74,6 +74,8 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.View.MeasureSpec;
 import android.widget.Toast;
+
+import androidx.core.content.ContextCompat;
 
 /** This class was originally named due to encapsulating the camera preview,
  *  but in practice it's grown to more than this, and includes most of the
@@ -804,8 +806,12 @@ public class Preview implements SurfaceHolder.Callback, TextureView.SurfaceTextu
 	    			if( video_uri != null ) {
 			    		if( MyDebug.LOG )
 			    			Log.d(TAG, "delete corrupt video: " + video_uri);
-	    				DocumentsContract.deleteDocument(getContext().getContentResolver(), video_uri);
-	    			}
+						try {
+							DocumentsContract.deleteDocument(getContext().getContentResolver(), video_uri);
+						} catch (FileNotFoundException ex) {
+							ex.printStackTrace();
+						}
+					}
 	    		}
 	    		else if( video_method == ApplicationInterface.VIDEOMETHOD_FILE ) {
 		    		if( video_filename != null ) {
